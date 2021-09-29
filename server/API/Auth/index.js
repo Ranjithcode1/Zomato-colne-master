@@ -1,12 +1,12 @@
 //Library
 import express from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import passport from "passport";
 
 //Models
-
 import { UserModel } from "../../database/user/index";
+
+//validation
+import { ValidateSignup, ValidateSignin} from '../../validation/auth';
 
 const Router = express.Router();
 
@@ -20,6 +20,7 @@ Method      POST
 
 Router.post("/signup", async (req, res) => {
   try {
+    await ValidateSignup(req.body.credentials);
     await UserModel.findByEmailAndPhone(req.body.credentials);
 
     //save to db
@@ -43,6 +44,7 @@ Method      POST
 
 Router.post("/signin", async (req, res) => {
   try {
+    await ValidateSignin(req.body.credentials);
     const user = await UserModel.findByEmailAndPassword(req.body.credentials);
 
     const token = user.generateJwtToken();
@@ -51,10 +53,10 @@ Router.post("/signin", async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-});
+}); 
 /*
 Route       /auth/google
-Desc        Sign in with email & password
+Desc        Route for google authentication
 params      none
 Access      public
 Method      GET    
@@ -72,7 +74,7 @@ Router.get(
 
 /*
 Route       /auth/google/callback
-Desc        Sign in with email & password
+Desc        google callback function
 params      none
 Access      public
 Method      GET    

@@ -4,6 +4,13 @@ import express from "express";
 //Database Modal
 import { RestaurantModel } from "../../database/allModel";
 
+//Validation
+import {
+  ValidateRestaurantCity,
+  ValidateRestaurantSearchString,
+} from "../../validation/restaurant";
+import { ValidateRestaurantId } from "../../validation/food";
+
 const Router = express.Router();
 
 /*
@@ -16,7 +23,9 @@ Method      GET
 
 Router.get("/", async (req, res) => {
   try {
+    await ValidateRestaurantCity(req.query);
     const { city } = req.query;
+
     const restaurants = await RestaurantModel.find({ city });
     return res.json({ restaurants });
   } catch (error) {
@@ -25,14 +34,15 @@ Router.get("/", async (req, res) => {
 });
 
 /*
-Route       /restaurants/id
+Route       /restaurants/_id
 Des         get individual restaurant details based on id
-Params      none
+Params      _id
 Access      Public
 Method      GET    
 */
 Router.get("/:_id", async (req, res) => {
   try {
+    await ValidateRestaurantId(req.params);
     const { _id } = req.params;
 
     const restaurant = await RestaurantModel.findById(_id);
@@ -55,6 +65,7 @@ Method      GET
 */
 Router.get("/search", async (req, res) => {
   try {
+    await ValidateRestaurantSearchString(req.body);
     const { searchString } = req.body;
 
     const restaurants = await RestaurantModel.find({
@@ -66,7 +77,7 @@ Router.get("/search", async (req, res) => {
         .json({ error: `No Restaurants matched with ${searchString} ` });
     }
 
-    return res.json({restaurants});
+    return res.json({ restaurants });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

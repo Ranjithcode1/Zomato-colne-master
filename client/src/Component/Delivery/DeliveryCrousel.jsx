@@ -66,7 +66,7 @@ function DeliveryCrousel() {
   return (
     <>
      
-        <h1 className="text-xl lg:text-3xl mb-4 text-gray-800 lg:px-12 font-semibold">
+        <h1 className="text-xl lg:text-3xl mb-4 text-gray-800 lg:px-12 font-bold">
           Inspiration for your first order
         </h1>
         <div className="lg:hidden flex gap-3 flex-wrap justify-between">

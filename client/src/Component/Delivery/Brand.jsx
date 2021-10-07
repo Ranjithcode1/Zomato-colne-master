@@ -46,15 +46,26 @@ function Brand() {
     ],
   };
 
-  return <div className='my-5 p-8 lg:p-12' >
-        <Slider {...settings} >
-            {logos.map((logo) => (
-                <div className='w-38 h-38 px-2 lg:px-8 bg-white flex items-center' >
-                    <img src={logo} alt='brand' className='w-full h-full object-cover object-center'/>
-                </div>
-            ))}
-        </Slider>
-  </div>;
+  return (
+    <div className="my-5 p-8 lg:p-12 ">
+      <h1 className="text-xl lg:text-3xl mb-4 text-gray-800  font-bold">
+        Top brands for you
+      </h1>
+      <Slider {...settings}>
+        {logos.map((logo) => (
+          <div className="w-38 h-full px-2 lg:px-8 bg-white flex items-center">
+            <div className="w-full h-38 border shadow-md rounded-xl p-3 md:p-5 ">
+              <img
+                src={logo}
+                alt="brand"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
 }
 
 export default Brand;

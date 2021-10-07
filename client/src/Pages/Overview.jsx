@@ -97,6 +97,7 @@ function Overview() {
         settings: {
           slidesToScroll: 1,
           slidesToShow: 1,
+          dots: false,
         },
       },
     ],

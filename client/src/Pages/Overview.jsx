@@ -121,7 +121,7 @@ function Overview() {
           <div className="flex flex-wrap gap-3 my-4">
             <MenuCollection
               menuTitle="Menu"
-              pages="4 pages"
+              pages={menuImage.length}
               image={menuImage}
             />
           </div>
@@ -189,7 +189,6 @@ function Overview() {
               <ReviewCard {...reviewData} />
             ))}
           </div>
-
         </div>
         <aside
           style={{ height: "fit-content" }}

@@ -9,7 +9,6 @@ import passport from "passport";
 import googleAuthConfig from "./config/google.config";
 import routerConfig from "./config/route.config";
 
-
 //Routes
 import Auth from "./API/Auth/index";
 import Restaurant from "./API/Restaurant/index";
@@ -18,7 +17,8 @@ import Menu from "./API/Menu/index";
 import Image from "./API/Image/index";
 import Order from "./API/Orders/index";
 import Review from "./API/Reviews/index";
-import User from "./API/User/index"
+import User from "./API/User/index";
+import MailService from "./API/Mail/index";
 
 //Database connection
 
@@ -28,7 +28,7 @@ const zomato = express();
 
 //passport config
 googleAuthConfig(passport);
-routerConfig(passport)
+routerConfig(passport);
 
 zomato.use(express.json());
 zomato.use(express.urlencoded({ extended: false }));
@@ -49,6 +49,7 @@ zomato.use("/image", Image);
 zomato.use("/order", Order);
 zomato.use("/review", Review);
 zomato.use("/user", User);
+zomato.use("/mail", MailService);
 
 zomato.listen(4000, () =>
   ConnectDB()

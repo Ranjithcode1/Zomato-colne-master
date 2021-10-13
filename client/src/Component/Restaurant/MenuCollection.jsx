@@ -21,10 +21,10 @@ function MenuCollection(props) {
         />
       )}
       <div
-        className="w-32 h-32 md:w-48 flex flex-col md:h-48"
+        className="w-32 h-32 md:w-48 flex flex-col md:h-48 "
         onClick={openViewer}
       >
-        <div className='w-full h-full overflow-hidden rounded-lg' >
+        <div className='w-full h-full overflow-hidden rounded-lg ' >
         <img
           src={props.image[0]}
           alt="menu"
@@ -34,7 +34,7 @@ function MenuCollection(props) {
       
       <div>
         <strong>{props.menuTitle}</strong>
-        <p>{props.pages}</p>
+        <p>{props.pages} Pages</p>
       </div>
       </div>
     </>

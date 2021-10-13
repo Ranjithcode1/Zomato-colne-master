@@ -1,5 +1,6 @@
 import HomeLayoutHOC from "./HOC/Home.HOC";
 import RestaurantLayoutHOC from "./HOC/Restaurant.HOC";
+import CheckoutLayoutHOC from "./HOC/Checkout.HOC";
 
 //Pages
 import Home from "./Pages/Home";
@@ -11,7 +12,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Redirect, Route } from "react-router";
 import Overview from "./Pages/Overview";
-import OrderOnline from './Pages/OrderOnline'
+import OrderOnline from "./Pages/OrderOnline";
+import Reviews from "./Pages/Reviews";
+import Menu from "./Pages/Menu";
+import Photos from "./Pages/Photos";
+import Checkout from "./Pages/Checkout";
+
 
 function App() {
   return (
@@ -26,6 +32,9 @@ function App() {
         exact
         component={Overview}
       />
+      <Route path="/restaurant/:id" exact>
+        <Redirect to="/restaurant/:id/overview" />
+      </Route>
       <RestaurantLayoutHOC
         path="/restaurant/:id/order-online"
         exact
@@ -34,14 +43,15 @@ function App() {
       <RestaurantLayoutHOC
         path="/restaurant/:id/reviews"
         exact
-        component={Temp}
+        component={Reviews}
       />
-      <RestaurantLayoutHOC path="/restaurant/:id/menu" exact component={Temp} />
+      <RestaurantLayoutHOC path="/restaurant/:id/menu" exact component={Menu} />
       <RestaurantLayoutHOC
         path="/restaurant/:id/photos"
         exact
-        component={Temp}
+        component={Photos}
       />
+      <CheckoutLayoutHOC path='/checkout/orders' exact component={Checkout} />
     </div>
   );
 }

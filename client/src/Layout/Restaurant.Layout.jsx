@@ -10,6 +10,7 @@ import { TiStarOutline } from "react-icons/ti";
 import { RiDirectionLine, RiShareForwardLine } from "react-icons/ri";
 import { BiBookmarkPlus } from "react-icons/bi";
 import Tabs from "../Component/Restaurant/Tabs";
+import CartContainer from "../Component/Cart/CartContainer";
 
 function RestaurantLayout({ children }) {
   const [restaurant, setRestaurant] = useState({
@@ -57,7 +58,9 @@ function RestaurantLayout({ children }) {
             <Tabs/>
         </div>
         {children}
+     
       </div>
+      <CartContainer/>
       
     </>
   );

@@ -6,7 +6,11 @@ import { HiLocationMarker } from "react-icons/hi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { RiSearchLine } from "react-icons/ri";
 
-function MobileNav({ user, setIsDropdownOpen, isDropdownOpen }) {
+//component
+import SignUp from "../Auth/SignUp";
+import SignIn from "../Auth/SignIn";
+
+function MobileNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) {
   return (
     <>
       <div className="flex w-full items-center justify-between lg:hidden">
@@ -23,38 +27,45 @@ function MobileNav({ user, setIsDropdownOpen, isDropdownOpen }) {
           </button>
           {user ? (
             <>
-            <div  onClick={() => setIsDropdownOpen((prev) => !prev)} className='border p-1 border-gray-300 text-zomato-400 w-14 h-14 rounded-full'>
-            <img
+              <div
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                className="border p-1 border-gray-300 text-zomato-400 w-14 h-14 rounded-full"
+              >
+                <img
                   src="https://e7.pngegg.com/pngimages/312/283/png-clipart-man-s-face-avatar-computer-icons-user-profile-business-user-avatar-blue-face.png"
                   className="w-full h-full rounded-full object-cover"
                   alt="UserImage"
                 />
-            </div>
-            {isDropdownOpen && (
+              </div>
+              {isDropdownOpen && (
                 <div className="absolute top-20 right-1 shadow-lg py-3 pl-3 bg-white w-32 z-30 flex-col gap-2 border-2 border-gray-100 rounded-md">
                   <button>SignOut</button>
                 </div>
               )}
             </>
-          ) : (<>
-              <span onClick={() => setIsDropdownOpen((prev) => !prev)} className=' border p-3 border-gray-300 text-zomato-400  rounded-full' >
-                <FaUserAlt/>
+          ) : (
+            <>
+              <span
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                className=" border p-3 border-gray-300 text-zomato-400  rounded-full"
+              >
+                <FaUserAlt />
               </span>
               {isDropdownOpen && (
-                <div className='absolute shadow-lg py-3 -bottom-20 -right-4 w-full bg-white flex flex-col gap-2 ' >
-                  <button>SignIn</button>
-                  <button>SignUp</button>
-
+                <div className="absolute shadow-lg py-3 -bottom-20 -right-4 w-full bg-white flex flex-col gap-2 ">
+                  <button onClick={signIn} >SignIn</button>
+                  <button onClick={signUp} >SignUp</button>
                 </div>
-              ) }
-          </>) }
+              )}
+            </>
+          )}
         </div>
       </div>
     </>
   );
 }
 
-function LargeNav({ user, setIsDropdownOpen, isDropdownOpen }) {
+function LargeNav({ user, setIsDropdownOpen, isDropdownOpen,signUp, signIn }) {
   return (
     <>
       <div className="hidden lg:inline container px-32 mx-auto">
@@ -101,16 +112,16 @@ function LargeNav({ user, setIsDropdownOpen, isDropdownOpen }) {
               </div>
               {isDropdownOpen && (
                 <div className="absolute top-20 shadow-lg py-3 pl-3 bg-white w-32 z-30 flex-col gap-2 border-2 border-gray-100 rounded-md">
-                  <button>SignOut</button>
+                  <button>LogOut</button>
                 </div>
               )}
             </div>
           ) : (
             <div className=" ml-28 flex gap-6">
-              <button className="text-gray-500 text-lg hover:text-gray-800">
+              <button onClick={signIn} className="text-gray-500 text-lg hover:text-gray-800">
                 Login
               </button>
-              <button className="text-gray-500 text-lg hover:text-gray-800">
+              <button onClick={signUp} className="text-gray-500 text-lg hover:text-gray-800">
                 Signup
               </button>
             </div>
@@ -124,18 +135,37 @@ function LargeNav({ user, setIsDropdownOpen, isDropdownOpen }) {
 function Navbar() {
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [openSignup, setOpenSignup] = useState(false);
+  const [openSignin, setOpenSignin] = useState(false);
+
+  const openSignInModal = () => {
+    setOpenSignin(true);
+  };
+
+  const openSignUpModal = () => {
+    setOpenSignup(true);
+  };
+
   return (
     <>
+
+      <SignIn isOpen={openSignin} setIsOpen={setOpenSignin}/>
+      <SignUp isOpen={openSignup} setIsOpen={setOpenSignup}/>
+
       <nav className="p-4 flex bg-white shadow-md lg:shadow-none w-full items-center">
         <MobileNav
           user={user}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
+          signIn={openSignInModal}
+          signUp={openSignUpModal}
         />
         <LargeNav
           user={user}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
+          signIn={openSignInModal}
+          signUp={openSignUpModal}
         />
       </nav>
     </>

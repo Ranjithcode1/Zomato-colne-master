@@ -7,7 +7,7 @@ const RestaurantSchema = new mongoose.Schema(
     address: { type: String, required: true },
     mapLocation: { type: String, required: true },
     cuisine: [String],
-    resturantTiming: String,
+    restaurantTiming: String,
     contactNumber: Number,
     website: String,
     popularDishes: [String],
@@ -35,4 +35,4 @@ const RestaurantSchema = new mongoose.Schema(
   }
 );
 
-export const RestaurantModel = mongoose.model("Resturants", RestaurantSchema);
+export const RestaurantModel = mongoose.model("Restaurants", RestaurantSchema);

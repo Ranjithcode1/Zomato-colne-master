@@ -10,7 +10,7 @@ function MapView(props) {
     <>
       <div>
         <h4 className="text-xl font-medium">Call</h4>
-        <h5 className="text-zomato-400 font-medium"> {props.phno} </h5>
+        <h5 className="text-zomato-400 font-medium"> +91 {props.contactNumber} </h5>
       </div>
       <div>
         <h4 className="text-xl font-medium"> Direction </h4>

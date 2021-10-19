@@ -15,6 +15,7 @@ function Menu() {
             <div className='flex flex-wrap gap-3' >
                 <MenuCollection menuTitle='Menu' pages={menus.length}  image={menus} />
             </div>
+            <div className='my-20' ></div>
         </>
     )
 }

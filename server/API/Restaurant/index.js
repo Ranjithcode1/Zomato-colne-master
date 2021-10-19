@@ -15,7 +15,7 @@ const Router = express.Router();
 
 /*
 Route       /restaurants
-Des         get all resturant details based on the city name
+Des         get all restaurant details based on the city name
 Params      none
 Access      Public
 Method      GET    

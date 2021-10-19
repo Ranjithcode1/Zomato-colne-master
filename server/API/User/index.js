@@ -3,8 +3,30 @@ import express from "express";
 // database Model
 
 import { UserModel } from "../../database/allModel";
+import passport from "passport";
+
 
 const Router = express.Router();
+
+
+
+/*
+Route           /
+Des             Get user data
+Params          null
+Access          Public
+Method          GET
+*/
+Router.get("/", passport.authenticate("jwt"), (req, res) => {
+  try {
+    const { email, fullName, phoneNumber, address } =
+      req.session.passport.user._doc;
+
+    return res.json({ user: { email, fullName, phoneNumber, address } });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
 
 /*
 Route       /:_id
@@ -19,7 +41,8 @@ Router.get("/:_id", async (req, res) => {
 
     const getUser = await UserModel.findById(_id);
     if (!getUser) return res.status(400).json({ user: " User not found" });
-    return res.json({ user: getUser });
+    const { fullName } = getUser;
+    return res.json({ user: { fullName } });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

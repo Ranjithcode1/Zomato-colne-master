@@ -1,57 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RestaurantCard from "../RestaurantCard";
 import DeliveryCrousel from "./DeliveryCrousel";
 
+//Redux
+import { useSelector } from "react-redux";
+
 function Delivery() {
-  const [restaurantList, setrestaurantList] = useState([
-    {
-      _id: "123456",
-      photos: [
-        "https://b.zmtcdn.com/data/pictures/5/19770655/f5571d6126f15f4499f2f46c9288627c_o2_featured_v2.jpg?output-format=webp",
-      ],
-      name: "Bakehouse Comfort",
-      cuisine: ["Bakery", "Desserts", "Fast Food"],
-      isPro: false,
-      isOff: true,
-      durationOfDelivery: 47,
-      restaurantReviewValue: 4.1,
-      averageCost: 250,
-    },
-    {
-      _id: "123342",
-      photos: [
-        "https://b.zmtcdn.com/data/pictures/5/19770655/f5571d6126f15f4499f2f46c9288627c_o2_featured_v2.jpg?output-format=webp",
-      ],
-      name: "Bakehouse Comfort",
-      cuisine: ["Bakery", "Desserts", "Fast Food"],
-      isPro: true,
-      isOff: true,
-      durationOfDelivery: 47,
-      restaurantReviewValue: 4.1,
-      averageCost: 250,
-    },
-    {
-      _id: "1233423",
-      photos: [
-        "https://b.zmtcdn.com/data/pictures/5/19770655/f5571d6126f15f4499f2f46c9288627c_o2_featured_v2.jpg?output-format=webp",
-      ],
-      name: "Bakehouse Comfort",
-      cuisine: ["Bakery", "Desserts", "Fast Food"],
-      isPro: true,
-      isOff: false,
-      durationOfDelivery: 47,
-      restaurantReviewValue: 4.1,
-      averageCost: 250,
-    },
-  ]);
+  const [restaurantList, setRestaurantList] = useState([]);
+
+  const reduxState = useSelector(
+    (globalStore) => globalStore.restaurant.restaurants
+  );
+  useEffect(() => {
+    reduxState.restaurants && setRestaurantList(reduxState.restaurants);
+    console.log(reduxState.restaurants);
+  }, [reduxState.restaurants]);
+
   return (
     <>
-      <div className='bg-gray-50 px-8 md:px-0 py-10' >
+      <div className="bg-gray-50 px-8 md:px-0 py-10">
         <DeliveryCrousel />
       </div>
       <div className="flex justify-between flex-wrap lg:px-20">
         {restaurantList.map((restaurant) => (
-          <RestaurantCard {...restaurant} key={restaurant.id} />
+          <RestaurantCard {...restaurant} key={restaurant._id} />
         ))}
       </div>
     </>

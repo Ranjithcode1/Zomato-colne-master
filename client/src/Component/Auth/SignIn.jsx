@@ -4,7 +4,12 @@ import { Fragment, useState } from "react";
 //Icons
 import { FcGoogle } from "react-icons/fc";
 
+//redux
+import { useDispatch } from "react-redux";
+import { signin } from "../../Redux/Reducer/Auth/auth.action";
+
 export default function SignIn({ isOpen, setIsOpen }) {
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -17,6 +22,18 @@ export default function SignIn({ isOpen, setIsOpen }) {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const submit = () => {
+    setUserData({
+      email: "",
+      password: "",
+    });
+    dispatch(signin(userData));
+    closeModal();
+  };
+
+  const googleSignIn = () =>
+    (window.location.href = "http://localhost:4000/auth/google");
 
   return (
     <>
@@ -61,7 +78,10 @@ export default function SignIn({ isOpen, setIsOpen }) {
                   className="text-lg font-medium leading-6 text-gray-900"
                 ></Dialog.Title>
                 <div className="mt-2 flex flex-col gap-3 w-full">
-                  <button className="py-2 justify-center rounded-lg flex items-center gap-2 w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100">
+                  <button
+                    onClick={googleSignIn}
+                    className="py-2 justify-center rounded-lg flex items-center gap-2 w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100"
+                  >
                     SignIn with Google <FcGoogle />
                   </button>
                   <form className="flex flex-col gap-3">
@@ -87,7 +107,10 @@ export default function SignIn({ isOpen, setIsOpen }) {
                         className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400"
                       />
                     </div>
-                    <div onClick={closeModal} className="w-full text-center bg-zomato-400 text-white py-2 rounded-lg">
+                    <div
+                      onClick={submit}
+                      className="w-full text-center bg-zomato-400 text-white py-2 rounded-lg cursor-pointer"
+                    >
                       SignIn
                     </div>
                   </form>

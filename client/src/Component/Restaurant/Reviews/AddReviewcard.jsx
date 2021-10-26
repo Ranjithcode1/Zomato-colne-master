@@ -5,6 +5,9 @@ function AddReviewcard() {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
+    if (!localStorage.zomatoUser) {
+      return alert("you must be logged in to add a review");
+    }
     setIsOpen(true);
   };
 
@@ -20,7 +23,9 @@ function AddReviewcard() {
           <label htmlFor="delivery">Delivery</label>
         </div>
       </div>
-      <button onClick={openModal} className=' text-zomato-400'>Write a review</button>
+      <button onClick={openModal} className=" text-zomato-400">
+        Write a review
+      </button>
     </>
   );
 }

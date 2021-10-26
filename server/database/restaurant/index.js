@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const RestaurantSchema = new mongoose.Schema(
   {
@@ -21,10 +21,12 @@ const RestaurantSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Menus",
     },
-    reviews: {
-      type: mongoose.Types.ObjectId,
-      ref: "Reviews",
-    },
+    reviews: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Reviews",
+      },
+    ],
     photos: {
       type: mongoose.Types.ObjectId,
       ref: "Images",

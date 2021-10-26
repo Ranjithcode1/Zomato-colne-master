@@ -12,7 +12,7 @@ import FoodItem from "./FoodItem"
 function CartSM({ toggle }) {
   return (
     <>
-      <div className="md:hidden flex items-center justify-between">
+      <div className="md:hidden flex items-center justify-between z-50">
         <div className="flex flex-col items-start">
           <small className="flex items-center gap-1">
             {" "}

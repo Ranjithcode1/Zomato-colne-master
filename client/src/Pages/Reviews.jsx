@@ -1,46 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReviewCard from "../Component/Restaurant/ReviewCard";
 import AddReviewcard from "../Component/Restaurant/Reviews/AddReviewcard";
 
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { getReviews } from "../Redux/Reducer/Reviews/reviews.action";
+
 function Reviews() {
-  const [Reviews, setReviews] = useState([
-    {
-      userName: "Ranjith",
-      isRestaurantReview: true,
-      createdAt: "2020-06-01T12:00:00.000Z",
-      reviewText: "This place is a must visit.",
-    },
-    {
-      userName: "Dinesh",
-      isRestaurantReview: true,
-      createdAt: "2020-06-01T12:00:00.000Z",
-      reviewText: "This place is a must visit.",
-    },
-    {
-      userName: "Chandru",
-      isRestaurantReview: false,
-      createdAt: "2020-06-01T12:00:00.000Z",
-      reviewText: "This place is a must visit.",
-    },
-    {
-      userName: "Abishek",
-      isRestaurantReview: false,
-      createdAt: "2020-06-01T12:00:00.000Z",
-      reviewText: "This place is a must visit.",
-    },
-    {
-      userName: "Vijay",
-      isRestaurantReview: false,
-      createdAt: "2020-06-01T12:00:00.000Z",
-      reviewText: "This place is a must visit.",
-    },
-    {
-      userName: "Saravana",
-      isRestaurantReview: false,
-      createdAt: "2020-06-01T12:00:00.000Z",
-      reviewText: "This place is a must visit.",
-    },
-  ]);
+
+  const [reviews, setReviews] = useState([]);
+
+  const reduxState = useSelector(
+    (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
+  );
+
+  const dispatch = useDispatch();
+ 
+
+  // useEffect(() => {
+  //   reduxState &&
+  //     dispatch(getReviews(reduxState?._id)).then((data) => {
+  //       setReviews(data.payload.reviews)
+  //     });
+  // }, [reduxState]);
+
   return (
     <>
       <div className="w-full flex flex-col md:flex-row relative gap-6">
@@ -48,7 +31,7 @@ function Reviews() {
           <div className="md:hidden">
             <AddReviewcard />
           </div>
-          {Reviews.map((review) => (
+          {reviews.map((review) => (
             <ReviewCard {...review} />
           ))}
         </div>

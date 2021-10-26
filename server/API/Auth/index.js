@@ -6,7 +6,7 @@ import passport from "passport";
 import { UserModel } from "../../database/user/index";
 
 //validation
-import { ValidateSignup, ValidateSignin} from '../../validation/auth';
+import { ValidateSignup, ValidateSignin } from "../../validation/auth";
 
 const Router = express.Router();
 
@@ -53,7 +53,7 @@ Router.post("/signin", async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-}); 
+});
 /*
 Route       /auth/google
 Desc        Route for google authentication
@@ -83,7 +83,8 @@ Router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    return res.json({ token: req.session.passport.user.token }
+    return res.redirect(
+      `http://localhost:3000/google/${req.session.passport.user.token}`
     );
   }
 );

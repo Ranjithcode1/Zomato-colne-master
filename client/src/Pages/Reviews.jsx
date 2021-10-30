@@ -17,12 +17,12 @@ function Reviews() {
   const dispatch = useDispatch();
  
 
-  // useEffect(() => {
-  //   reduxState &&
-  //     dispatch(getReviews(reduxState?._id)).then((data) => {
-  //       setReviews(data.payload.reviews)
-  //     });
-  // }, [reduxState]);
+  useEffect(() => {
+    reduxState &&
+      dispatch(getReviews(reduxState?._id)).then((data) => {
+        setReviews(data.payload.reviews)
+      });
+  }, [reduxState]);
 
   return (
     <>

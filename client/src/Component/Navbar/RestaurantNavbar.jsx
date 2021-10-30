@@ -49,7 +49,7 @@ function MobileNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) 
               </div>
               {isDropdownOpen && (
                 <div className="absolute top-20 right-1 shadow-lg py-3 pl-3 bg-white w-32 z-30 flex-col gap-2 border-2 border-gray-100 rounded-md">
-                  <button onClick={signOutHandler}>SignOut</button>
+                  <button onClick={signOutHandler}>Sign Out</button>
                 </div>
               )}
             </>
@@ -126,7 +126,7 @@ function LargeNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) {
               </div>
               {isDropdownOpen && (
                 <div className="absolute top-20 shadow-lg py-3 pl-3 bg-white w-32 z-30 flex-col gap-2 border-2 border-gray-100 rounded-md">
-                  <button onClick={signOutHandler}>SignOut</button>
+                  <button onClick={signOutHandler}>Sign Out</button>
                 </div>
               )}
             </div>

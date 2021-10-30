@@ -19,6 +19,7 @@ import CartContainer from "../Component/Cart/CartContainer";
 //Redux
 import { getSpecificRestaurant } from "../Redux/Reducer/restaurant/restaurant.action";
 import { getImage } from "../Redux/Reducer/Image/Image.action";
+import { getCart } from "../Redux/Reducer/Cart/cart.action";
 
 function RestaurantLayout({ children }) {
   const { id } = useParams();
@@ -44,6 +45,7 @@ function RestaurantLayout({ children }) {
         }));
       });
     });
+    dispatch(getCart());
   }, []);
   return (
     <>

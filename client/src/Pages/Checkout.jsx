@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { BsShieldLockFill } from "react-icons/bs";
+import Razorpay from "razorpay";
 
 // component
 import FoodItem from "../Component/Cart/FoodItem";
 import AddressList from "../Component/Checkout/AddressList";
 
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { createOrder } from "../Redux/Reducer/Order/order.action";
+
 function Checkout() {
+  const reduxStateCart = useSelector((globalstore) => globalstore.cart.cart);
+  const reduxStateUser = useSelector(
+    (globalStore) => globalStore.user.user.user
+  );
+
+  const dispatch = useDispatch();
+
   const [address] = useState([
     {
       name: "Home",
@@ -21,24 +33,36 @@ function Checkout() {
     },
   ]);
 
-  const [foods] = useState([
-    {
+  const reduxState = useSelector((globalStore) => globalStore.cart.cart);
+
+  const payNow = () => {
+    let options = {
+      key: "rzp_test_mgatVg9mEwCdub",
+      amount:
+        reduxStateCart.reduce((acc, curVal) => acc + curVal.totalPrice, 0) *
+        100,
+      currency: "INR",
+      name: "Zomato Master",
+      description: "Food Payment",
       image:
-        "https://b.zmtcdn.com/data/dish_photos/87c/153be    b91af9f43e157f3d6fd6ea2587c.jpg?output-format=webp",
-      name: "Chilli Paneer Gravy",
-      price: "157.50",
-      quantity: 4,
-      _id: 1,
-    },
-    {
-      image:
-        "https://b.zmtcdn.com/data/dish_photos/87c/153beb91af9f43e157f3d6fd6ea2587c.jpg?output-format=webp",
-      name: "Chilli Paneer Gravy",
-      price: "157.50",
-      quantity: 2,
-      _id: 2,
-    },
-  ]);
+        "https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png",
+      handler: function (response) {
+        alert("payment Done");
+      },
+      prefill: {
+        name: reduxStateUser.fullName,
+        email: reduxStateUser.email,
+      },
+      theme: {
+        color: "#e23744",
+      },
+    };
+
+    let razorPay = new window.Razorpay(options);
+    razorPay.open();
+  };
+
+  const [foods] = useState([]);
 
   return (
     <div className="my-10 flex flex-col gap-3 items-center">
@@ -54,7 +78,7 @@ function Checkout() {
             </small>
           </div>
           <div className="my-4 px-4 h-full flex flex-col gap-2 w-full md:w-3/5">
-            {foods.map((food) => (
+            {reduxState.map((food) => (
               <FoodItem {...food} key={food._id} />
             ))}
           </div>
@@ -63,7 +87,10 @@ function Checkout() {
             <AddressList address={address} />
           </div>
         </div>
-        <button className="flex items-center gap-2 justify-center my-4 md:my-8 w-full px-4 md:w-4/5 h-14 text-white font-medium text-lg bg-zomato-400 rounded-lg">
+        <button
+          onClick={payNow}
+          className="flex items-center gap-2 justify-center my-4 md:my-8 w-full px-4 md:w-4/5 h-14 text-white font-medium text-lg bg-zomato-400 rounded-lg"
+        >
           Pay Securely <BsShieldLockFill />
         </button>
       </div>

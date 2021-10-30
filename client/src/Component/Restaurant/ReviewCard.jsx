@@ -23,9 +23,9 @@ function ReviewCard(props) {
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-full">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Arh-avatar.jpg"
+                src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper.png"
                 alt="avatar"
-                className="w-full h-full rounded-full object-center"
+                className="w-full h-full rounded-full object-center object-cover"
               />
             </div>
             <div className="flex flex-col">

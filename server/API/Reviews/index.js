@@ -18,7 +18,7 @@ Router.get("/:resid", async (req, res) => {
   try {
     const { resid } = req.params;
 
-    const reviews = await ReviewModel.findOne({ restaurant: resid });
+    const reviews = await ReviewModel.find({ restaurant: resid });
     return res.json({ reviews });
   } catch (error) {
     return res.status(500).json({ error: error.message });

@@ -35,9 +35,9 @@ function Overview() {
         data.payload.image.images.map(({ location }) => images.push(location));
         setMenuImages(images);
       });
-      // dispatch(getReviews(reduxState?._id)).then((data) => {
-      //   setReviews(data.payload.reviews);
-      // });
+      dispatch(getReviews(reduxState?._id)).then((data) => {
+        setReviews(data.payload.reviews);
+      });
     }
   }, [reduxState]);
 

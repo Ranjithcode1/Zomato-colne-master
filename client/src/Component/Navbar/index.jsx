@@ -13,7 +13,13 @@ import SignIn from "../Auth/SignIn";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut } from "../../Redux/Reducer/Auth/auth.action";
 
-function MobileNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) {
+function MobileNav({
+  user,
+  setIsDropdownOpen,
+  isDropdownOpen,
+  signIn,
+  signUp,
+}) {
   const dispatch = useDispatch();
   const signOutHandler = () => {
     dispatch(signOut());
@@ -32,7 +38,7 @@ function MobileNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) 
           <button className="bg-zomato-400 text-white py-2 px-3 rounded-full">
             Use App
           </button>
-          {user ?.user?.fullName ? (
+          {user?.user?.fullName ? (
             <>
               <div
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
@@ -46,7 +52,7 @@ function MobileNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) 
               </div>
               {isDropdownOpen && (
                 <div className="absolute top-20 right-1 shadow-lg py-3 pl-3 bg-white w-32 z-30 flex-col gap-2 border-2 border-gray-100 rounded-md">
-                  <button onClick={signOutHandler} >LogOut</button>
+                  <button onClick={signOutHandler}>Sign Out</button>
                 </div>
               )}
             </>
@@ -60,8 +66,8 @@ function MobileNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) 
               </span>
               {isDropdownOpen && (
                 <div className="absolute shadow-lg py-3 -bottom-20 -right-4 w-full bg-white flex flex-col gap-2 ">
-                  <button onClick={signIn} >SignIn</button>
-                  <button onClick={signUp} >SignUp</button>
+                  <button onClick={signIn}>SignIn</button>
+                  <button onClick={signUp}>SignUp</button>
                 </div>
               )}
             </>
@@ -72,7 +78,7 @@ function MobileNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) 
   );
 }
 
-function LargeNav({ user, setIsDropdownOpen, isDropdownOpen,signUp, signIn }) {
+function LargeNav({ user, setIsDropdownOpen, isDropdownOpen, signUp, signIn }) {
   const dispatch = useDispatch();
   const signOutHandler = () => {
     dispatch(signOut());
@@ -109,7 +115,7 @@ function LargeNav({ user, setIsDropdownOpen, isDropdownOpen,signUp, signIn }) {
               />
             </div>
           </div>
-          {user ?.user?.fullName ? (
+          {user?.user?.fullName ? (
             <div className=" relative w-16">
               <div
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
@@ -123,16 +129,22 @@ function LargeNav({ user, setIsDropdownOpen, isDropdownOpen,signUp, signIn }) {
               </div>
               {isDropdownOpen && (
                 <div className="absolute top-20 shadow-lg py-3 pl-3 bg-white w-32 z-30 flex-col gap-2 border-2 border-gray-100 rounded-md">
-                  <button onClick={signOutHandler} >LogOut</button>
+                  <button onClick={signOutHandler}>Sign Out</button>
                 </div>
               )}
             </div>
           ) : (
             <div className=" ml-28 flex gap-6">
-              <button onClick={signIn} className="text-gray-500 text-lg hover:text-gray-800">
+              <button
+                onClick={signIn}
+                className="text-gray-500 text-lg hover:text-gray-800"
+              >
                 Login
               </button>
-              <button onClick={signUp} className="text-gray-500 text-lg hover:text-gray-800">
+              <button
+                onClick={signUp}
+                className="text-gray-500 text-lg hover:text-gray-800"
+              >
                 Signup
               </button>
             </div>
@@ -159,9 +171,8 @@ function Navbar() {
 
   return (
     <>
-    
-      <SignIn isOpen={openSignin} setIsOpen={setOpenSignin}/>
-      <SignUp isOpen={openSignup} setIsOpen={setOpenSignup}/>
+      <SignIn isOpen={openSignin} setIsOpen={setOpenSignin} />
+      <SignUp isOpen={openSignup} setIsOpen={setOpenSignup} />
 
       <nav className="p-4 flex bg-white shadow-md lg:shadow-none w-full items-center">
         <MobileNav

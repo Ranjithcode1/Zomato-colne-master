@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom' 
 
 //Icons
 import { FaUserAlt } from "react-icons/fa";
@@ -25,11 +26,12 @@ function MobileNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) 
       <div className="flex w-full items-center justify-between lg:hidden">
         <IoChevronBackSharp />
         <div className="w-28">
+          <Link to={`/delivery`} >
           <img
             src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
             alt="Zomato Logo"
             className=" w-full h-full"
-          />
+          /></Link>
         </div>
         <div className="flex items-center gap-3 relative">
           <button className="bg-zomato-400 text-white py-2 px-3 rounded-full">
@@ -85,11 +87,12 @@ function LargeNav({ user, setIsDropdownOpen, isDropdownOpen, signIn, signUp }) {
       <div className="hidden lg:inline container px-32 mx-auto">
         <div className="hidden gap-4 w-full items-center justify-around lg:flex">
           <div className="w-28">
+          <Link to={`/delivery`} >
             <img
               src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
               alt="Zomato logo"
               className="w-full h-full"
-            />
+            /></Link> 
           </div>
           <div className="w-3/4 bg-white shadow-md p-3 flex items-center gap-3 border border-gray-200 rounded-lg">
             <div className="flex items-center gap-2 border-r-2 border-gray-300 pr-2">
